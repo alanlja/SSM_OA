@@ -222,7 +222,7 @@ function UserOper() {
         param.userId = userId;
 
         $.ajax({
-            url:"/SSMProject/user/delUser",
+            url:"/user/delUser",
             async:true,
             type:"GET",
             data:param,

@@ -52,7 +52,7 @@
                     </tr>
                     <tr  height="30px">
                         <td width="100%" colspan="3" style="text-align:left;">
-                            <button onclick="javascript:userOper.addUser();" >新增</button>
+                            <button onclick="userOper.addUser();" >新增</button>
                         </td>
                     </tr>
                 </table>

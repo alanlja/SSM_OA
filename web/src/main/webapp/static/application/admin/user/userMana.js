@@ -1,8 +1,8 @@
 var pageSize = 3;
 var totalCount;
 var userOper;
-$(Document).ready(function () {
-   userOper = new userOper();
+$(document).ready(function () {
+   userOper = new UserOper();
    loadUserPage(0);
    
    $("#queryButton").bind("click",function () {

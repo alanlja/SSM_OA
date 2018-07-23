@@ -2,13 +2,14 @@ var getArea = new GetArea();
 //初始化下拉框参数
 //参数顺序：省份id，地市id、区县id、省份元素id，地市元素id、区县元素id
 function CascadeArea(provinceId,cityId,countyId,eprovinceId,ecityId,ecountyId) {
+
     getArea.getProvinces('CHN',provinceId,eprovinceId,ecityId);
     getArea.getCity(provinceId,cityId,ecityId,ecountyId);
     getArea.getCounty(cityId,countyId,ecountyId);
 
     $("#"+ecityId).click(
         function() {
-            var pGeoId = $("#" + eprovinceId + "option:selected").val();
+            var pGeoId = $("#"+eprovinceId+"  option:selected").val();
             if (!pGeoId) {
                 alert("请选择省份！");
                 return;
@@ -16,8 +17,8 @@ function CascadeArea(provinceId,cityId,countyId,eprovinceId,ecityId,ecountyId) {
         });
 
     $("#"+ecountyId).click(
-        function () {
-            var pGeoId = $("#" + eprovinceId + "option:selected").val();
+        function() {
+            var pGeoId = $("#"+eprovinceId+"  option:selected").val();
             if (!pGeoId) {
                 alert("请选择省份！");
                 return;
@@ -27,40 +28,40 @@ function CascadeArea(provinceId,cityId,countyId,eprovinceId,ecityId,ecountyId) {
                 alert("请选择地市！");
                 return;
             }
+
         });
 
     //省份下拉框志改变，清空地市、区县数据
-    $("#"+eprovinceId).change(
-        function () {
-            $("#"+ecityId+"option").remove();
-            $("#"+ecountyId+"option").remove();
+    $("#"+eprovinceId).change(function() {
+        $("#"+ecityId+" option").remove();
+        $("#"+ecountyId+" option").remove();
 
-            //查询下一级区域
-            var pId = $("#"+eprovinceId).val();
-            //预加载地市
-            getArea.getCity(pId,null,ecityId);
-            //初始化区县
-            getArea.getCounty(null,null,ecountyId);
+        //查询下一级区域
+        var pId=$("#"+eprovinceId).val();
+        //预加载地市
+        getArea.getCity(pId,null,ecityId);
+        //初始化区县
+        getArea.getCounty(null,null,ecountyId);
     });
     //地市下拉框值改变，清空区县数据
-    $("#"+ecityId).change(
-        function() {
-            $("#"+ecountyId+" option").remove();
-            //查询下一级区域
-            var cId=$("#"+ecityId).val();
-            //预加载区县
-            getArea.getCounty(cId,null,ecountyId);
-        });
+    $("#"+ecityId).change(function() {
+        $("#"+ecountyId+" option").remove();
+        //查询下一级区域
+        var cId=$("#"+ecityId).val();
+        //预加载区县
+        getArea.getCounty(cId,null,ecountyId);
+    });
 }
 
-function GetArea() {
-    //初始化省级区域
-    this.getProvinces = function (chId,provinceId,eprovinceId,ecityId) {
-        //初始化省级区域
-        var len = $("#"+eprovinceId+"option").length;
-        if (len < 1){
+function GetArea(){
+
+    // 初始化省级区域
+    this.getProvinces = function(chId,provinceId,eprovinceId,ecityId){
+        // 初始化省级区域
+        var len = $("#"+eprovinceId+"  option").length;
+        if (len < 1) {
             var areaId = chId;
-            $.getJSON("/getAreaList",{
+            $.getJSON("/getAreaList", {
                 areaParentId : areaId
             }, function(data) {
                 var pObj = $("#"+eprovinceId);
@@ -73,9 +74,9 @@ function GetArea() {
                 if(provinceId){
                     $("#"+eprovinceId).val(provinceId);
                     //预加载地市
-                    getArea.getCity(provinceId,null,ecityId);
+                    //getArea.getCity(provinceId,null,ecityId);
                 }
-            });// getJson
+            });
         }
     }
 
@@ -97,10 +98,10 @@ function GetArea() {
                     if(cityId){
                         $("#"+ecityId).val(cityId);
                         //预加载区县
-                        getArea.getCounty(cityId,null,ecountyId);
+                        //getArea.getCounty(cityId,null,ecountyId);
                     }
 
-                });// getJson
+                });
             }
         }
     }
@@ -123,8 +124,10 @@ function GetArea() {
                     if(countyId){
                         $("#"+ecountyId).val(countyId);
                     }
-                });// getJson
+                });
             }
         }
     }
+
+
 }
