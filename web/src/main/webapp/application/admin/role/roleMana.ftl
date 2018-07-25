@@ -9,6 +9,9 @@
 <link rel="stylesheet" href="/static/plugin/zTree/css/zTreeStyle/zTreeStyle.css" type="text/css">
 <script type="text/javascript" src="/static/plugin/zTree/js/jquery.ztree.core.js"></script>
 
+<script type="text/javascript"  src="/static/application/admin/role/roleOper.js"></script>
+<script type="text/javascript"  src="/static/application/admin/role/roleMana.js"></script>
+
 </script>
 
 </head>
