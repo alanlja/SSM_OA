@@ -1,8 +1,10 @@
 var pageSize = 3;
 var totalCount;
 var userOper;
+var emailOper;
 $(document).ready(function () {
    userOper = new UserOper();
+   emailOper = new EmailOper();
    loadUserPage(0);
    
    $("#queryButton").bind("click",function () {

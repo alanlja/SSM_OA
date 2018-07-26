@@ -52,4 +52,14 @@ public class UserServiceImpl implements IUserService {
     public void delUserById(long userId) {
         userMapper.deleteByPrimaryKey(userId);
     }
+
+    @Override
+    public List<Map<String, Object>> getUserSexStaticties() {
+        return userMapper.getUserSexStaticties();
+    }
+
+    @Override
+    public List<Map<String, Object>> getProvincePersonStaticties() {
+        return userMapper.getProvincePersonStaticties();
+    }
 }

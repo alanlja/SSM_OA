@@ -3,6 +3,7 @@ package com.lja.oa.service;
 import com.lja.oa.pojo.User;
 import com.lja.oa.pojo.Users;
 
+import java.util.List;
 import java.util.Map;
 
 public interface IUserService {
@@ -15,4 +16,8 @@ public interface IUserService {
     void updateUser(User user);
 
     void delUserById(long userId);
+
+    List<Map<String, Object>> getUserSexStaticties();
+
+    List<Map<String, Object>> getProvincePersonStaticties();
 }

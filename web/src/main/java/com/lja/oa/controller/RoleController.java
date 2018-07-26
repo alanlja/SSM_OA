@@ -25,8 +25,7 @@ public class RoleController extends BaseController {
     private IRoleService roleService;
 
     @RequestMapping("/roleMana")
-    public ModelAndView toroleMana(HttpServletRequest request,
-                                   HttpServletResponse response) {
+    public ModelAndView toroleMana(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView result = new ModelAndView("/role/roleMana");
         return result;
     }
@@ -50,8 +49,7 @@ public class RoleController extends BaseController {
     }
     //展示页码信息
     @RequestMapping("/getPageNumber")
-    public ModelAndView getPageNumber(HttpServletRequest request,
-                                      HttpServletResponse response) {
+    public ModelAndView getPageNumber(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView result = new ModelAndView("role/rolePageNumber");
         int total = Integer.parseInt(request.getParameter("total"));
         int startIndex = Integer.parseInt(request.getParameter("startIndex"));
@@ -63,8 +61,7 @@ public class RoleController extends BaseController {
     //添加信息
     @RequestMapping("/add")
     @ResponseBody
-    public void insert(HttpServletRequest request,
-                       HttpServletResponse response, Role role) {
+    public void insert(HttpServletRequest request, HttpServletResponse response, Role role) {
         Map<String, Object> retMap = new HashMap<String, Object>();
         try {
             roleService.insert(role);
@@ -82,8 +79,7 @@ public class RoleController extends BaseController {
     //查看组织信息
     @RequestMapping("/queryRole")
     @ResponseBody
-    public void selectByPrimaryKey(HttpServletRequest request,
-                                   HttpServletResponse response, long roleId) {
+    public void selectByPrimaryKey(HttpServletRequest request, HttpServletResponse response, long roleId) {
         Map<String, Object> retMap = new HashMap<String, Object>();
         try {
             Role role = roleService.selectByPrimaryKey(roleId);
@@ -102,8 +98,7 @@ public class RoleController extends BaseController {
     //修改组织信息
     @RequestMapping("/update")
     @ResponseBody
-    public void updateByPrimaryKeySelective(HttpServletRequest request,
-                                            HttpServletResponse response, Role role) {
+    public void updateByPrimaryKeySelective(HttpServletRequest request, HttpServletResponse response, Role role) {
         Map<String, Object> retMap = new HashMap<String, Object>();
         try {
             roleService.updateByPrimaryKeySelective(role);
@@ -121,8 +116,7 @@ public class RoleController extends BaseController {
     //删除组织信息
     @RequestMapping(method = RequestMethod.POST, value = "/delete")
     @ResponseBody
-    public void deleteByPrimaryKey(HttpServletRequest request,
-                                   HttpServletResponse response, long roleId) {
+    public void deleteByPrimaryKey(HttpServletRequest request, HttpServletResponse response, long roleId) {
         Map<String, Object> retMap = new HashMap<String, Object>();
         try {
             roleService.deleteByPrimaryKey(roleId);

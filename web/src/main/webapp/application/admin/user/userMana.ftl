@@ -17,7 +17,7 @@
 <script type="text/javascript" src="/static/application/admin/user/orgAddTree.js"></script>
 <script type="text/javascript" src="/static/application/admin/user/orgQueryTree.js"></script>
 <script type="text/javascript" src="/static/application/admin/user/userOper.js"></script>
-
+<script type="text/javascript" src="/static/application/admin/user/emailOper.js"></script>
 <#-- 引入区域信息的js -->
 <script type="text/javascript" src="/static/utils/getArea.js"></script>
 

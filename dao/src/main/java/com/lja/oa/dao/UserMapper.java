@@ -61,4 +61,8 @@ public interface UserMapper {
     int getCount(Map<String, Object> paramMap);
 
     Users queryUserById(int userId);
+
+    List<Map<String, Object>> getUserSexStaticties();
+
+    List<Map<String, Object>> getProvincePersonStaticties();
 }

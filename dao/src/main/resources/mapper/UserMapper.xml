@@ -392,5 +392,18 @@
         AND U.USER_ID=#{userId}
     </select>
 
+    <!-- 查询每个省份性别的个数 -->
+    <select id="getUserSexStaticties" resultType="map">
+        select U.PROVINCE_NAME as provinceName,
+        SUM(CASE WHEN U.USER_SEX=1 THEN 1 ELSE 0 END) as boy,
+        SUM(CASE WHEN U.USER_SEX=2 THEN 1 ELSE 0 END) as girl,
+        SUM(CASE WHEN U.USER_SEX=3 THEN 1 ELSE 0 END) as secrity
+        from sys_user U GROUP BY U.PROVINCE_NAME
+    </select>
 
+    <!-- 查询每个省的总人数 -->
+    <select id="getProvincePersonStaticties" resultType="map">
+        select U.PROVINCE_NAME as name,SUM(1) as value
+        from sys_user U GROUP BY U.PROVINCE_NAME
+    </select>
 </mapper>

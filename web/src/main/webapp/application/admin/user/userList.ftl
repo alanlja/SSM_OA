@@ -33,6 +33,7 @@
                     <#if user.contryName??>${user.contryName}</#if>
                 </td>
                 <td>
+                    <a href="javascript:void();"  onClick="javascript:emailOper.sendEmail('<#if user.email??>${user.email}</#if>')" style="cursor:pointer;">发送邮件</a>
                     <a href="javascript:void();"  onClick="javascript:userOper.editUser('<#if user.userId??>${user.userId}</#if>')" style="cursor:pointer;">编辑</a>
                     <a href="javascript:void();"  onClick="javascript:userOper.showUser('<#if user.userId??>${user.userId}</#if>')" style="cursor:pointer;">查看</a>
                     <a href="javascript:void();"  onClick="javascript:userOper.deleteUser('<#if user.userId??>${user.userId}</#if>')" style="cursor:pointer;")">删除</a>

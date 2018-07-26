@@ -5,6 +5,7 @@ import com.lja.oa.pojo.User;
 import com.lja.oa.pojo.Users;
 import com.lja.oa.service.IUserService;
 import common.controller.BaseController;
+import common.email.FastestEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,10 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/user")
@@ -132,6 +130,70 @@ public class UserController extends BaseController {
         }
         Gson gson = new Gson();
         String responseContent = gson.toJson(resultMap);
+        this.flushResponse(response, responseContent);
+    }
+
+    /**
+     * 查询每个省中每个性别的人数
+     */
+    @RequestMapping("/getUserSexStaticties")
+    public void getUserSexStaticties(HttpServletResponse response){
+        Map<String, Object> resutlMap = new HashMap<>();
+        List<Map<String, Object>> list = new ArrayList<>();
+        try {
+            //[{girl=1, provinceName=北京市, secrity=0, boy=0}, {girl=0, provinceName=广东省, secrity=0, boy=2}, {girl=0, provinceName=福建省, secrity=0, boy=1}]
+            list = userService.getUserSexStaticties();
+            resutlMap.put("list", list);
+            resutlMap.put("isSuccess", true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            resutlMap.put("isSuccess", false);
+        }
+        Gson gson = new Gson();
+        //{"list":[{"girl":1,"provinceName":"北京市","secrity":0,"boy":0},{"girl":0,"provinceName":"广东省","secrity":0,"boy":2},{"girl":0,"provinceName":"福建省","secrity":0,"boy":1}],"isSuccess":true}
+        String responseContent = gson.toJson(resutlMap);
+        this.flushResponse(response, responseContent);
+    }
+
+    /**
+     * 查询每个省份的人数
+     */
+    @RequestMapping("/getProvincePersonStaticties")
+    public void getProvincePersonStaticties(HttpServletResponse response){
+        Map<String, Object> resutlMap = new HashMap<>();
+        List<Map<String, Object>> list = new ArrayList<>();
+        try {
+            list = userService.getProvincePersonStaticties();
+            resutlMap.put("list", list);
+            resutlMap.put("isSuccess", true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            resutlMap.put("isSuccess", false);
+        }
+        Gson gson = new Gson();
+        String responseContent = gson.toJson(resutlMap);
+        this.flushResponse(response, responseContent);
+    }
+
+    /**
+     * 发送邮件
+     */
+    @RequestMapping("/sendEmail")
+    public void sendEmail(HttpServletRequest request,HttpServletResponse response){
+        Map<String, Object> resutlMap = new HashMap<>();
+        try {
+            String sendAddress = request.getParameter("sendAddress");
+            String title = request.getParameter("title");
+            String content = request.getParameter("content");
+
+            FastestEmail.sendEmail(sendAddress,title,content);
+            resutlMap.put("isSuccess", true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            resutlMap.put("isSuccess", false);
+        }
+        Gson gson = new Gson();
+        String responseContent = gson.toJson(resutlMap);
         this.flushResponse(response, responseContent);
     }
 }
