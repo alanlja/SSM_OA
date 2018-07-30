@@ -1,6 +1,8 @@
 package com.lja.oa.service.impl;
 
+import com.lja.oa.dao.RoleUserRelMapper;
 import com.lja.oa.dao.UserMapper;
+import com.lja.oa.pojo.RoleUserRel;
 import com.lja.oa.pojo.User;
 import com.lja.oa.pojo.Users;
 import com.lja.oa.service.IUserService;
@@ -16,6 +18,9 @@ public class UserServiceImpl implements IUserService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private RoleUserRelMapper relMapper;
 
     @Override
     public Map<String, Object> getPage(Map<String, Object> paramMap) {
@@ -61,5 +66,15 @@ public class UserServiceImpl implements IUserService {
     @Override
     public List<Map<String, Object>> getProvincePersonStaticties() {
         return userMapper.getProvincePersonStaticties();
+    }
+
+    @Override
+    public List<User> getUserByOrgId(int orgId) {
+        return userMapper.getUserByOrgId(orgId);
+    }
+
+    @Override
+    public void addRoleUserRel(RoleUserRel rel) {
+        relMapper.insert(rel);
     }
 }

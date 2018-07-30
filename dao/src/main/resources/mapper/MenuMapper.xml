@@ -263,4 +263,9 @@
             AND M.MENU_PARENT_ID = #{menuParentId,jdbcType=BIGINT}
         </if>
     </select>
+
+    <select id="queryMenuListByMenuParentId" parameterType="map" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from sys_menu M
+        where M.MENU_PARENT_ID=#{menuParentId};
+    </select>
 </mapper>

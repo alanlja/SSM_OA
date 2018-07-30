@@ -56,4 +56,5 @@ public interface RoleMapper {
      */
     int updateByPrimaryKey(Role record);
     public List<Role> getRoleList();
+    public List<Role> queryRoleList();
 }

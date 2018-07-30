@@ -152,4 +152,9 @@
         from sys_role where state = 1
     </select>
 
+    <select id="queryRoleList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_role WHERE STATE = 1
+    </select>
+
 </mapper>

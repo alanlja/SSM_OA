@@ -2,6 +2,7 @@ package com.lja.oa.service;
 
 import com.lja.oa.pojo.Menu;
 import com.lja.oa.pojo.Menus;
+import com.lja.oa.pojo.RoleMenuRel;
 
 import java.util.List;
 import java.util.Map;
@@ -58,4 +59,6 @@ public interface IMenuService {
      * @mbggenerated Mon Mar 13 16:11:18 CST 2017
      */
     int updateByPrimaryKey(Menu record);
+    public List<Menu> queryMenuListByMenuParentId(Map<String, Object> paramMap);
+    public void addRoleMenuRel(RoleMenuRel rel);
 }

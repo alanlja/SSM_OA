@@ -66,4 +66,9 @@ public class RoleServiceImpl implements IRoleService {
     public List<Role> getRoleList() {
         return roleMapper.getRoleList();
     }
+
+    @Override
+    public List<Role> queryRoleList() {
+        return roleMapper.getRoleList();
+    }
 }

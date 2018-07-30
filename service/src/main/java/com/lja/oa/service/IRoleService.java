@@ -57,4 +57,6 @@ public interface IRoleService {
     int updateByPrimaryKey(Role record);
 
     public List<Role> getRoleList();
+
+    public List<Role> queryRoleList();
 }

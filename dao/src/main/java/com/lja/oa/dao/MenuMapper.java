@@ -60,4 +60,6 @@ public interface MenuMapper {
      * @mbggenerated Sun Apr 09 13:13:38 CST 2017
      */
     int updateByPrimaryKey(Menu record);
+
+    public List<Menu> queryMenuListByMenuParentId(Map<String, Object> paramMap);
 }

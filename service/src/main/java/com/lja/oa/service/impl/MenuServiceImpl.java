@@ -1,8 +1,10 @@
 package com.lja.oa.service.impl;
 
 import com.lja.oa.dao.MenuMapper;
+import com.lja.oa.dao.RoleMenuRelMapper;
 import com.lja.oa.pojo.Menu;
 import com.lja.oa.pojo.Menus;
+import com.lja.oa.pojo.RoleMenuRel;
 import com.lja.oa.service.IMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,9 @@ import java.util.Map;
 public class MenuServiceImpl implements IMenuService {
     @Autowired
     private MenuMapper menuMapper;
+
+    @Autowired
+    private RoleMenuRelMapper relMapper;
 
     @Override
     public Map<String, Object> queryMenuPage(Map<String, Object> paramMap) {
@@ -69,5 +74,15 @@ public class MenuServiceImpl implements IMenuService {
     @Override
     public Menus selectMenusByPrimaryKey(long menuId) {
         return menuMapper.selectMenusByPrimaryKey(menuId);
+    }
+
+    @Override
+    public List<Menu> queryMenuListByMenuParentId(Map<String, Object> paramMap) {
+        return menuMapper.queryMenuListByMenuParentId(paramMap);
+    }
+
+    @Override
+    public void addRoleMenuRel(RoleMenuRel rel) {
+        relMapper.insert(rel);
     }
 }

@@ -65,4 +65,6 @@ public interface UserMapper {
     List<Map<String, Object>> getUserSexStaticties();
 
     List<Map<String, Object>> getProvincePersonStaticties();
+
+    List<User> getUserByOrgId(int orgId);
 }

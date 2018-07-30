@@ -1,5 +1,6 @@
 package com.lja.oa.service;
 
+import com.lja.oa.pojo.RoleUserRel;
 import com.lja.oa.pojo.User;
 import com.lja.oa.pojo.Users;
 
@@ -20,4 +21,8 @@ public interface IUserService {
     List<Map<String, Object>> getUserSexStaticties();
 
     List<Map<String, Object>> getProvincePersonStaticties();
+
+    List<User> getUserByOrgId(int orgId);
+
+    void addRoleUserRel(RoleUserRel rel);
 }

@@ -62,4 +62,8 @@ public interface OrgMapper {
     int getCount(Map<String, Object> paramMap);
 
     Orgs queryOrgById(int orgId);
+
+    List<Org> getOrgList(Map<String, Object> paramMap);
+
+    int getTotalCount(Map<String, Object> paramMap);
 }

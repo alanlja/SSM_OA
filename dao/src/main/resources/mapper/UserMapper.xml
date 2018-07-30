@@ -406,4 +406,10 @@
         select U.PROVINCE_NAME as name,SUM(1) as value
         from sys_user U GROUP BY U.PROVINCE_NAME
     </select>
+
+    <!-- 通过组织id查询用户信息 -->
+    <select id="getUserByOrgId" parameterType="int" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from sys_user
+        where ORG_ID = #{orgId}
+    </select>
 </mapper>
