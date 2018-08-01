@@ -97,4 +97,9 @@ public class UserServiceImpl implements IUserService {
     public void insertSheetData(List<Map<String, Object>> list) {
         userMapper.insertSheetData(list);
     }
+
+    @Override
+    public List<Map<String, Object>> getColumnList() {
+        return userMapper.getColumnList();
+    }
 }

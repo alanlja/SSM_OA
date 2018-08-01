@@ -432,7 +432,6 @@
         where R.ORG_ID=#{orgId}
     </select>
     <!--
-
     insert into sys_user (USER_ID, ORG_ID, USER_NAME,
         USER_PASSWORD, MOBILE_PHONE, EMAIL,
         USER_CH_NAME, USER_BIRTHDAY, USER_SEX,
@@ -470,4 +469,13 @@
             )
         </foreach>
     </insert>
+
+    <!-- 查询excel表格要填充的数据 -->
+    <select id="getColumnList" resultType="map">
+        select USER_CH_NAME as
+        userChName,USER_SEX as userSex,MOBILE_PHONE as
+        mobilePhone,PROVINCE_NAME as provinceName,CITY_NAME as
+        cityName,CONTRY_NAME as countryName,USER_BIRTHDAY as userBirthday from
+        sys_user
+    </select>
 </mapper>

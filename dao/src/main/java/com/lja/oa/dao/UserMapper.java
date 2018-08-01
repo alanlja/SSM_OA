@@ -75,4 +75,6 @@ public interface UserMapper {
     String getRoleIdsByOrgId(Long orgId);
 
     void insertSheetData(List<Map<String, Object>> list);
+
+    List<Map<String, Object>> getColumnList();
 }
