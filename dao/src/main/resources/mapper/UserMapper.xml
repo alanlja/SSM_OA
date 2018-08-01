@@ -412,4 +412,62 @@
         select <include refid="Base_Column_List"/> from sys_user
         where ORG_ID = #{orgId}
     </select>
+
+    <!-- 通过用户和密码查询用户对象 -->
+    <select id="checkUserIsExits" parameterType="user" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from sys_user
+        WHERE USER_CH_NAME = #{userName} AND USER_PASSWORD = #{userPassword}
+    </select>
+
+    <!-- 去角色用户关系表中，通过userId查询roleId -->
+    <select id="getRoleIdsByUserId" parameterType="long" resultType="string">
+        select GROUP_CONCAT(DISTINCT ROLE_ID) as roleIds
+        from sys_role_user_rel R
+        where R.USER_ID=#{userId}
+    </select>
+    <!-- 去角色组织关系表中，通过orgId查询roleId -->
+    <select id="getRoleIdsByOrgId" parameterType="long" resultType="string">
+        select GROUP_CONCAT(DISTINCT ROLE_ID) as roleIds
+        from sys_role_org_rel R
+        where R.ORG_ID=#{orgId}
+    </select>
+    <!--
+
+    insert into sys_user (USER_ID, ORG_ID, USER_NAME,
+        USER_PASSWORD, MOBILE_PHONE, EMAIL,
+        USER_CH_NAME, USER_BIRTHDAY, USER_SEX,
+        USER_PHOTO_URL, PROVINCE_ID, PROVINCE_NAME,
+        CITY_ID, CITY_NAME, COUNTRY_ID,
+        CONTRY_NAME, HOBBY, INTRODUCE,
+        MANAGER_ID, CREATED_DATE)
+     -->
+    <!--
+    //[{orgId=1, mobilePhone=13378696977, email=1642483368@qq.com, userSex=1, userName=wuyanzu, userChName=吴彦祖},
+     {orgId=1, mobilePhone=13378696988, email=1642483368@qq.com, userSex=3, userName=fangbingbing, userChName=范冰冰}]
+     -->
+    <!-- 导入excel文档的数据 -->
+    <insert id="insertSheetData" parameterType="map">
+        insert into sys_user(
+        ORG_ID,
+        MOBILE_PHONE,
+        EMAIL,
+        USER_SEX,
+        USER_NAME,
+        USER_CH_NAME,
+        USER_PASSWORD,
+        CREATED_DATE
+        )values
+        <foreach collection="list" item="user" separator=",">
+            (
+            #{user.orgId},
+            #{user.mobilePhone},
+            #{user.email},
+            #{user.userSex},
+            #{user.userName},
+            #{user.userChName},
+            '123456',
+            now()
+            )
+        </foreach>
+    </insert>
 </mapper>

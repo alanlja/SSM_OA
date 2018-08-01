@@ -25,4 +25,12 @@ public interface IUserService {
     List<User> getUserByOrgId(int orgId);
 
     void addRoleUserRel(RoleUserRel rel);
+
+    User checkUserIsExits(User user);
+
+    String getRoleIdsByUserId(Long userId);
+
+    String getRoleIdsByOrgId(Long orgId);
+
+    void insertSheetData(List<Map<String, Object>> list);
 }

@@ -67,4 +67,12 @@ public interface UserMapper {
     List<Map<String, Object>> getProvincePersonStaticties();
 
     List<User> getUserByOrgId(int orgId);
+
+    User checkUserIsExits(User user);
+
+    String getRoleIdsByUserId(Long userId);
+
+    String getRoleIdsByOrgId(Long orgId);
+
+    void insertSheetData(List<Map<String, Object>> list);
 }

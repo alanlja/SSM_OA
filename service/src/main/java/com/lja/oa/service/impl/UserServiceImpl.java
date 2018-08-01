@@ -77,4 +77,24 @@ public class UserServiceImpl implements IUserService {
     public void addRoleUserRel(RoleUserRel rel) {
         relMapper.insert(rel);
     }
+
+    @Override
+    public User checkUserIsExits(User user) {
+        return userMapper.checkUserIsExits(user);
+    }
+
+    @Override
+    public String getRoleIdsByUserId(Long userId) {
+        return userMapper.getRoleIdsByUserId(userId);
+    }
+
+    @Override
+    public String getRoleIdsByOrgId(Long orgId) {
+        return userMapper.getRoleIdsByOrgId(orgId);
+    }
+
+    @Override
+    public void insertSheetData(List<Map<String, Object>> list) {
+        userMapper.insertSheetData(list);
+    }
 }

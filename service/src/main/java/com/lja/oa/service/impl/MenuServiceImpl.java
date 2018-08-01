@@ -85,4 +85,9 @@ public class MenuServiceImpl implements IMenuService {
     public void addRoleMenuRel(RoleMenuRel rel) {
         relMapper.insert(rel);
     }
+
+    @Override
+    public List<Menu> getMenuListByRoleIds(Map<String, Object> map) {
+        return menuMapper.getMenuListByRoleIds(map);
+    }
 }

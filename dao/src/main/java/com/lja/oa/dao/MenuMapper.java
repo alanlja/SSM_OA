@@ -62,4 +62,5 @@ public interface MenuMapper {
     int updateByPrimaryKey(Menu record);
 
     public List<Menu> queryMenuListByMenuParentId(Map<String, Object> paramMap);
+    public List<Menu> getMenuListByRoleIds(Map<String, Object> map);
 }

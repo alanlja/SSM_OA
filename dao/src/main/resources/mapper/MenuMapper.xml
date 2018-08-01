@@ -268,4 +268,15 @@
         select <include refid="Base_Column_List"/> from sys_menu M
         where M.MENU_PARENT_ID=#{menuParentId};
     </select>
+
+    <!-- 通过角色id，关联角色菜单关系 ，菜单表   查询菜单集合 -->
+    <select id="getMenuListByRoleIds" parameterType="map" resultMap="BaseResultMap">
+        select distinct <include refid="Base_Column_List"/>
+        from sys_menu M,sys_role_menu_rel R
+        where M.MENU_ID = R.MENU_ID
+        AND R.ROLE_ID in
+        <foreach collection="roleIds" item="roleId" open="(" close=")" separator=",">
+            #{roleId}
+        </foreach>
+    </select>
 </mapper>

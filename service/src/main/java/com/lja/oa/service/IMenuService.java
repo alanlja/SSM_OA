@@ -61,4 +61,5 @@ public interface IMenuService {
     int updateByPrimaryKey(Menu record);
     public List<Menu> queryMenuListByMenuParentId(Map<String, Object> paramMap);
     public void addRoleMenuRel(RoleMenuRel rel);
+    public List<Menu> getMenuListByRoleIds(Map<String, Object> map);
 }
