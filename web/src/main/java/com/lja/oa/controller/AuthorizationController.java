@@ -66,6 +66,77 @@ public class AuthorizationController extends BaseController {
     }
 
     /**
+     * 查询授权菜单分页信息
+     */
+    @RequestMapping("/queryMenuPage")
+    public ModelAndView queryMenuPage(HttpServletRequest request){
+        ModelAndView result = new ModelAndView("authorization/menuList");
+        Map<String,Object> paramMap =  this.getParam(request);
+        Map<String,Object> resultMap =  menuService.queryAuthMenuPage(paramMap);
+
+        List<Menu> menuList = (List<Menu>) resultMap.get("menuList");
+        int count = Integer.parseInt(resultMap.get("count").toString());
+        result.addObject("menuList", menuList);
+        result.addObject("count", count);
+        return result;
+    }
+
+    /**
+     * 查询授权人员分页信息
+     */
+    @RequestMapping("/queryUserPage")
+    public ModelAndView queryUserPage(HttpServletRequest request){
+        ModelAndView result = new ModelAndView("authorization/userList");
+        Map<String,Object> paramMap =  this.getParam(request);
+        Map<String,Object> resultMap =  userService.queryUserPage(paramMap);
+
+        List<User> userList = (List<User>) resultMap.get("userList");
+        int count = Integer.parseInt(resultMap.get("count").toString());
+        result.addObject("userList", userList);
+        result.addObject("count", count);
+        return result;
+    }
+
+    /**
+     * 加载组织页码
+     */
+    @RequestMapping("/queryOrgPageNumber")
+    public ModelAndView queryOrgPageNumber(HttpServletRequest request){
+        ModelAndView result = new ModelAndView("authorization/orgPageNumber");
+        int startIndex =Integer.parseInt(request.getParameter("startIndex"));
+        int pageSize =Integer.parseInt(request.getParameter("pageSize"));
+        int total =Integer.parseInt(request.getParameter("total"));
+
+        return this.getPageNumberInfo(total, startIndex, pageSize, result);
+    }
+
+    /**
+     * 加载菜单页码
+     */
+    @RequestMapping("/queryMenuPageNumber")
+    public ModelAndView queryMenuPageNumber(HttpServletRequest request){
+        ModelAndView result = new ModelAndView("authorization/menuPageNumber");
+        int startIndex =Integer.parseInt(request.getParameter("startIndex"));
+        int pageSize =Integer.parseInt(request.getParameter("pageSize"));
+        int total =Integer.parseInt(request.getParameter("total"));
+
+        return this.getPageNumberInfo(total, startIndex, pageSize, result);
+    }
+
+    /**
+     * 加载人员页码
+     */
+    @RequestMapping("/queryUserPageNumber")
+    public ModelAndView queryUserPageNumber(HttpServletRequest request){
+        ModelAndView result = new ModelAndView("authorization/userPageNumber");
+        int startIndex =Integer.parseInt(request.getParameter("startIndex"));
+        int pageSize =Integer.parseInt(request.getParameter("pageSize"));
+        int total =Integer.parseInt(request.getParameter("total"));
+
+        return this.getPageNumberInfo(total, startIndex, pageSize, result);
+    }
+
+    /**
      * 删除授权组织信息
      */
     @RequestMapping("/delOrgRoleRel")
@@ -73,6 +144,44 @@ public class AuthorizationController extends BaseController {
         Map<String, Object> resultMap = new HashMap<>();
         try {
             orgService.delOrgRoleRel(rel);
+            resultMap.put("isSuccess", true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultMap.put("isSuccess", false);
+        }
+        Gson gson = new Gson();
+        String responseContent = gson.toJson(resultMap);
+        this.flushResponse(response, responseContent);
+    }
+
+    /**
+     * 删除授权菜单信息
+     * delMenuRoleRel
+     */
+    @RequestMapping("/delMenuRoleRel")
+    public void delMenuRoleRel(RoleMenuRel rel, HttpServletResponse response){
+        Map<String, Object> resultMap = new HashMap<>();
+        try {
+            menuService.delMenuRoleRel(rel);
+            resultMap.put("isSuccess", true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultMap.put("isSuccess", false);
+        }
+        Gson gson = new Gson();
+        String responseContent = gson.toJson(resultMap);
+        this.flushResponse(response, responseContent);
+    }
+
+    /**
+     * 删除授权人员信息
+     * delUserRoleRel
+     */
+    @RequestMapping("/delUserRoleRel")
+    public void delUserRoleRel(RoleUserRel rel, HttpServletResponse response){
+        Map<String, Object> resultMap = new HashMap<>();
+        try {
+            userService.delUserRoleRel(rel);
             resultMap.put("isSuccess", true);
         } catch (Exception e) {
             e.printStackTrace();

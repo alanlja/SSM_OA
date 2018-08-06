@@ -119,4 +119,8 @@
       CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP}
     where ROLE_MENU_REL = #{roleMenuRel,jdbcType=BIGINT}
   </update>
+
+  <delete id="delMenuRoleRel" parameterType="RoleMenuRel">
+    delete from sys_role_menu_rel where MENU_ID = #{menuId} and ROLE_ID= #{roleId}
+  </delete>
 </mapper>

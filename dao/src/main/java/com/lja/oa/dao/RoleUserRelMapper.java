@@ -50,4 +50,6 @@ public interface RoleUserRelMapper {
      * @mbggenerated Fri May 19 11:14:10 CST 2017
      */
     int updateByPrimaryKey(RoleUserRel record);
+
+    void delUserRoleRel(RoleUserRel rel);
 }

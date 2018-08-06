@@ -346,6 +346,19 @@
             <artifactId>poi-scratchpad</artifactId>
             <version>3.10-FINAL</version>
         </dependency>
+
+        <!-- activity工作流需要的包 -->
+        <!-- activiti与spring集成 -->
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-spring</artifactId>
+            <version>6.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-engine</artifactId>
+            <version>6.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -478,4 +478,19 @@
         cityName,CONTRY_NAME as countryName,USER_BIRTHDAY as userBirthday from
         sys_user
     </select>
+
+    <!-- 查询授权的人员分页信息 -->
+    <select id="getAuthUserList" parameterType="map" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>  from sys_user U, sys_role_user_rel R
+        where U.USER_ID=R.USER_ID
+        and R.ROLE_ID = #{roleId}
+        limit #{startIndex},#{pageSize}
+    </select>
+
+    <!-- 查询授权的人员分页信息的条数 -->
+    <select id="getTotalCount" parameterType="map" resultType="int">
+        select count(*)  from sys_user U, sys_role_user_rel R
+        where U.USER_ID=R.USER_ID
+        and R.ROLE_ID = #{roleId}
+    </select>
 </mapper>

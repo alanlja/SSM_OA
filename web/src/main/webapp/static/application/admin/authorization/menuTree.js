@@ -21,10 +21,10 @@ function MenuTreeLayer(){
             html : htmlStr
         }
     });
-    loadOrgTree();
+    loadMenuTree();
 }
 
-function loadOrgTree(){
+function loadMenuTree(){
     var setting = {
         data : {
             simpleData : {

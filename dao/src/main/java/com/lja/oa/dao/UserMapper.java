@@ -77,4 +77,8 @@ public interface UserMapper {
     void insertSheetData(List<Map<String, Object>> list);
 
     List<Map<String, Object>> getColumnList();
+
+    List<User> getAuthUserList(Map<String, Object> paramMap);
+
+    int getTotalCount(Map<String, Object> paramMap);
 }

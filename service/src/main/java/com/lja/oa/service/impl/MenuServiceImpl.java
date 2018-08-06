@@ -35,7 +35,6 @@ public class MenuServiceImpl implements IMenuService {
         return retMap;
     }
 
-
     @Override
     public List<Menu> queryMenuDirListByMenuParentId(Map<String, Object> paramMap) {
         return menuMapper.queryMenuDirListByMenuParentId(paramMap);
@@ -89,5 +88,26 @@ public class MenuServiceImpl implements IMenuService {
     @Override
     public List<Menu> getMenuListByRoleIds(Map<String, Object> map) {
         return menuMapper.getMenuListByRoleIds(map);
+    }
+
+    @Override
+    public Map<String, Object> queryAuthMenuPage(Map<String, Object> paramMap) {
+        int startIndex = Integer.parseInt(paramMap.get("startIndex").toString());
+        int pageSize = Integer.parseInt(paramMap.get("pageSize").toString());
+        paramMap.put("startIndex", startIndex);
+        paramMap.put("pageSize", pageSize);
+
+        List<Menu> menuList = menuMapper.getMenuList(paramMap);
+        int count = menuMapper.getTotalCount(paramMap);
+
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("menuList", menuList);
+        resultMap.put("count", count);
+        return resultMap;
+    }
+
+    @Override
+    public void delMenuRoleRel(RoleMenuRel rel) {
+        relMapper.delMenuRoleRel(rel);
     }
 }

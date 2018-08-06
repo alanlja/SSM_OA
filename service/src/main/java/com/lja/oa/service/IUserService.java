@@ -35,4 +35,8 @@ public interface IUserService {
     void insertSheetData(List<Map<String, Object>> list);
 
     List<Map<String, Object>> getColumnList();
+
+    public Map<String,Object> queryUserPage(Map<String,Object> paramMap);
+
+    public void delUserRoleRel(RoleUserRel rel);
 }

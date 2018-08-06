@@ -15,15 +15,14 @@ import org.apache.poi.ss.usermodel.Sheet ;
 import org.apache.poi.ss.usermodel.Workbook ;
 import org.apache.poi.ss.util.CellRangeAddress ;
 
-
 public class ExcelUtil {
-	
+
 	//excel文件的后缀 = .xls
 	public static final String EXCEL_FILE_SUFFIX = ".xls" ;
 
 	//默认的excel列宽=20
 	public static final int DEFAULT_COLUMN_WIDTH = 250 ;
-	
+
 	/**
 	 * 读取Excel列表
 	 * @param wsheet
@@ -38,7 +37,7 @@ public class ExcelUtil {
 		for ( Row row : wsheet ) {
 			// 从数据行开始读
 			if ( row.getRowNum () >= startIndex ) {
-				
+
 				Map< String , Object > rowMap = new HashMap< String , Object > () ;
 				//startIndex为2，row为视觉第三行时，第二个for循环完成时rowMap里的数据
 				//rowMap.put ( "userChName" ,"彦吴祖") ;
@@ -60,7 +59,7 @@ public class ExcelUtil {
 		}
 		return list ;
 	}
-	
+
 	/**
 	 * 得到Excel中单元格的值
 	 * @param cell
@@ -93,66 +92,66 @@ public class ExcelUtil {
 		}
 		return value ;
 	}
-	
+
 	/**
 	 * 导出excel格式的文件
 	 * @param wsheet
 	 * @param parameters
-	 * @throws--RowsExceededException
-	 * @throws--WriteException
+	 * @throws_RowsExceededException
+	 * @throws_WriteException
 	 * @see
 	 * @since
 	 */
-	public void simpleExport (Workbook wwb , Sheet wsheet , SimpleExportParameter parameters ) {
+	public void simpleExport ( Workbook wwb , Sheet wsheet , SimpleExportParameter parameters ) {
 		fillHeaders ( wwb , wsheet , parameters ) ;
 		fillContent ( wwb , wsheet , parameters ) ;
 	}
-	
+
 	private void fillHeaders ( Workbook wwb , Sheet wsheet , SimpleExportParameter parameters ) {
 		//合并单元格
 		wsheet.addMergedRegion ( new CellRangeAddress ( 0 , 0 , 0 , parameters.getFieldsName ().length - 1 ) ) ;
-		
-		
+
+
 		Row titleRow = wsheet.createRow ( 0 ) ;// 标题行
 		Cell titileCell = titleRow.createCell ( 0 ) ;
-		
-		
+
+
 		Font titleFont = wwb.createFont () ;// 标题字体
 		titleFont.setFontHeightInPoints ( ( short ) 30 ) ;
 		titleFont.setFontName ( "Courier New" ) ;
 		titleFont.setBoldweight ( Font.BOLDWEIGHT_BOLD ) ;
-		
+
 		CellStyle titileStyle = wwb.createCellStyle () ;// 标题单元格格式：居中，底对齐
 		titileStyle.setAlignment ( CellStyle.ALIGN_CENTER ) ;
 		titileStyle.setVerticalAlignment ( CellStyle.VERTICAL_BOTTOM ) ;
 		titileStyle.setFont ( titleFont ) ;
-		
-		
+
+
 		titileCell.setCellStyle ( titileStyle ) ;
 		titileCell.setCellValue ( parameters.getTitle () ) ;
-		
-		
+
+
 		wsheet.setDefaultColumnWidth ( 20 * DEFAULT_COLUMN_WIDTH ) ;
-		
+
 		//设置单元格的宽度
 		for ( int i = 0 ; i < parameters.getFieldsName ().length ; ++i ) {
 			if ( parameters.getWidths () != null ) {
 				wsheet.setColumnWidth ( i , Integer.parseInt ( parameters.getWidths ()[i] ) * DEFAULT_COLUMN_WIDTH ) ;
 			}
 		}
-		
-		
+
+
 		Font font = wwb.createFont () ;// 列标题行字体
 		font.setFontHeightInPoints ( ( short ) 15 ) ;
 		font.setFontName ( "Courier New" ) ;
 		font.setBoldweight ( Font.BOLDWEIGHT_BOLD ) ;
-		
+
 		CellStyle cellStyle = wwb.createCellStyle () ;// 列标题行单元格格式：居中，底对齐
 		cellStyle.setAlignment ( CellStyle.ALIGN_CENTER ) ;
 		cellStyle.setVerticalAlignment ( CellStyle.VERTICAL_BOTTOM ) ;
 		cellStyle.setFont ( font ) ;
-		
-		
+
+
 		Row columnRow = wsheet.createRow ( 1 ) ;// 列标题行
 		//姓名,性别,电话,省份,地市,区县,生日";
 		for ( int i = 0 ; i < parameters.getFieldsName ().length ; ++i ) {
@@ -161,17 +160,17 @@ public class ExcelUtil {
 			cell.setCellValue ( parameters.getFieldsName ()[i] ) ;
 		}
 	}
-	
+
 	private void fillContent ( Workbook wwb , Sheet wsheet , SimpleExportParameter parameters ) {
 		List< Map< String , Object >> list = parameters.getDataList () ;
 		String value = "" ;
 		//userChName,userSex,mobilePhone,provinceName,cityName,contryName,userBirthday
 		String[] field = parameters.getFieldsId () ;
-		
+
 		for ( int i = 0 ; i < list.size () ; i++ ) {
-			
+
 			Row row = wsheet.createRow ( i + 2 ) ;
-			
+
 			for ( int j = 0 ; j < field.length ; j++ ) {
 				Cell cell = row.createCell ( j ) ;
 				Object origin = list.get ( i ).get ( field[j] ) ;// 原始数据

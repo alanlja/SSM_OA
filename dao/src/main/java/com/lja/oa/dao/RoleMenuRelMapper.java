@@ -50,4 +50,6 @@ public interface RoleMenuRelMapper {
      * @mbggenerated Thu May 18 15:34:21 CST 2017
      */
     int updateByPrimaryKey(RoleMenuRel record);
+
+    void delMenuRoleRel(RoleMenuRel rel);
 }

@@ -279,4 +279,19 @@
             #{roleId}
         </foreach>
     </select>
+
+    <!-- 查询授权的菜单分页信息 -->
+    <select id="getMenuList" parameterType="map" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>  from sys_menu M, sys_role_menu_rel R
+        where M.MENU_ID=R.MENU_ID
+        and R.ROLE_ID = #{roleId}
+        limit #{startIndex},#{pageSize}
+    </select>
+
+    <!-- 查询授权的菜单分页信息的条数 -->
+    <select id="getTotalCount" parameterType="map" resultType="int">
+        select count(*)  from sys_menu M, sys_role_menu_rel R
+        where M.MENU_ID=R.MENU_ID
+        and R.ROLE_ID = #{roleId}
+    </select>
 </mapper>

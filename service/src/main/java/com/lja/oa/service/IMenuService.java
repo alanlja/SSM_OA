@@ -62,4 +62,8 @@ public interface IMenuService {
     public List<Menu> queryMenuListByMenuParentId(Map<String, Object> paramMap);
     public void addRoleMenuRel(RoleMenuRel rel);
     public List<Menu> getMenuListByRoleIds(Map<String, Object> map);
+
+    public Map<String,Object> queryAuthMenuPage(Map<String,Object> paramMap);
+
+    public void delMenuRoleRel(RoleMenuRel rel);
 }

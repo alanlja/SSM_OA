@@ -2,6 +2,7 @@ package com.lja.oa.service.impl;
 
 import com.lja.oa.dao.RoleUserRelMapper;
 import com.lja.oa.dao.UserMapper;
+import com.lja.oa.pojo.RoleMenuRel;
 import com.lja.oa.pojo.RoleUserRel;
 import com.lja.oa.pojo.User;
 import com.lja.oa.pojo.Users;
@@ -101,5 +102,26 @@ public class UserServiceImpl implements IUserService {
     @Override
     public List<Map<String, Object>> getColumnList() {
         return userMapper.getColumnList();
+    }
+
+    @Override
+    public Map<String, Object> queryUserPage(Map<String, Object> paramMap) {
+        int startIndex = Integer.parseInt(paramMap.get("startIndex").toString());
+        int pageSize = Integer.parseInt(paramMap.get("pageSize").toString());
+        paramMap.put("startIndex", startIndex);
+        paramMap.put("pageSize", pageSize);
+
+        List<User> userList = userMapper.getAuthUserList(paramMap);
+        int count = userMapper.getTotalCount(paramMap);
+
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("userList", userList);
+        resultMap.put("count", count);
+        return resultMap;
+    }
+
+    @Override
+    public void delUserRoleRel(RoleUserRel rel) {
+        relMapper.delUserRoleRel(rel);
     }
 }

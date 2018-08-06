@@ -2,6 +2,7 @@ package com.lja.oa.dao;
 
 import com.lja.oa.pojo.Menu;
 import com.lja.oa.pojo.Menus;
+import com.lja.oa.pojo.Org;
 
 import java.util.List;
 import java.util.Map;
@@ -63,4 +64,8 @@ public interface MenuMapper {
 
     public List<Menu> queryMenuListByMenuParentId(Map<String, Object> paramMap);
     public List<Menu> getMenuListByRoleIds(Map<String, Object> map);
+
+    List<Menu> getMenuList(Map<String, Object> paramMap);
+
+    int getTotalCount(Map<String, Object> paramMap);
 }

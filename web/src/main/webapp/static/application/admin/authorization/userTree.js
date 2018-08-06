@@ -21,10 +21,10 @@ function UserTreeLayer(){
             html : htmlStr
         }
     });
-    loadOrgTree();
+    loadUserTree();
 }
 
-function loadOrgTree(){
+function loadUserTree(){
     var setting = {
         data : {
             simpleData : {
