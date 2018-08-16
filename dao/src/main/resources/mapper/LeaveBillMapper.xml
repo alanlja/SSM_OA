@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lja.oa.dao.LeaveBillMapper">
+	<resultMap type="leaveBill" id="leaveBillMap">
+		<id property="id" column="id" />
+		<result property="days" column="days" />
+		<result property="content" column="content" />
+		<result property="leaveDate" column="leaveDate" />
+		<result property="remark" column="remark" />
+		<result property="state" column="state" />
+	</resultMap>
+
+	<resultMap type="leaveBill" id="leaveBillResultMap" extends="leaveBillMap">
+		<association property="user" javaType="user">
+			<id property="userId" column="USER_ID"></id>
+			<result property="userChName" column="USER_CH_NAME" />
+		</association>
+	</resultMap>
+
+	<sql id="leaveBill_column_list">
+		U.USER_ID,U.USER_CH_NAME,B.id,B.days,B.content,B.leaveDate,B.remark,B.state
+	</sql>
+
+	<!-- 查询请假单的列表信息 -->
+	<select id="getLeaveBillListByUserChName" parameterType="string" resultMap="leaveBillResultMap">
+		select
+		<include refid="leaveBill_column_list" />
+		from sys_user U,sys_leavebill B
+		where U.USER_ID = B.user_id
+		and U.USER_CH_NAME = #{userChName}
+	</select>
+	<!-- 新增请假单 -->
+	<insert id="addLeaveBill" parameterType="leaveBill">
+		insert into sys_leavebill(days,content,remark,leaveDate,state,user_id)
+		values(
+			#{days},
+			#{content},
+			#{remark},
+			#{leaveDate},
+			#{state},
+			#{user.userId}
+		)
+	</insert>
+	<!-- 通过请假单id查询对象 -->
+	<select id="queryLeaveBillById" parameterType="long" resultMap="leaveBillResultMap">
+		select
+		<include refid="leaveBill_column_list" />
+		from sys_user U,sys_leavebill B
+		where U.USER_ID = B.user_id
+		and B.id = #{id}
+	</select>
+	
+	<!-- 修改请假单信息 -->
+	<update id="updateLeaveBill" parameterType="leaveBill">
+		update sys_leavebill set days = #{days},content = #{content},remark = #{remark}
+		where id = #{id}
+	</update>
+	<!--  删除请假单-->
+	<delete id="deleteById" parameterType="long">
+		delete from sys_leavebill where id = #{id}
+	</delete>
+
+	<!-- 修改请假单状态  -->
+	<update id="updateLeaveBillState" parameterType="map">
+		update sys_leavebill set state = #{state} where id =#{id}
+	</update>
+</mapper>
