@@ -41,7 +41,6 @@ function submitForm(){
         success:showResponse,//表单提交成功后调用的方法
         resetForm:false,
         dataType:"json"
-
     }
 
     $("#userExcelFileFormId").submit(function(){
